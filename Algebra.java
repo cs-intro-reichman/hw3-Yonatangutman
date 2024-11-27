@@ -24,9 +24,17 @@ public class Algebra {
 	public static int plus(int x1, int x2) {
       int a = x1;
 	  int b = x2;
-	  for(int i=0; i<b; i++) {
-        a++;
+	   if (b<0) {
+	   for (int i=0; b<i; i--) {
+	      a--;
+	    }
+	    }else{
+	      for (int i=0; i<b; i++)
+		{
+		  a++;
 		}
+	    }
+		
 		return a; 
 
 	}	
@@ -35,9 +43,15 @@ public class Algebra {
 	public static int minus(int x1, int x2) {
 		int a = x1;
 		int b = x2;
-		for(int i=0; i<b; i++) {
-		  a--;
-		  }
+		if (b<0) {
+			for (int i=0; b<i; i--) {
+			   a++;
+			 }
+			 }else{
+			   for (int i=0; i<b; i++){
+			   a--;
+			 }
+			 }
 
 		return a;
 	}
@@ -47,12 +61,34 @@ public class Algebra {
 		int a = x1;
 		int b = x2;
 		int sumA = a;
-		for(int i=0; i<b-1; i++) {
+        
+		if (a==0 || b==0) {
+			sumA = 0;
+		}else if (a>0 && b>0) {	
+		  for(int i=1; i<b; i++) {
 		  sumA= plus(sumA,a);
 		  }
 
-		  return sumA; 
-	}
+		}else if (a<0 && b>0) {
+		  for(int i=1; i<b; i++) {
+		  sumA= plus(sumA,a);
+		  }
+		}else if (a>0 && b<0) {
+          sumA = b;
+		  for(int i=1; i<a; i++) {
+			sumA= plus(sumA,b);
+			}
+		}else{ for(int i=-1; i>b; i--) {
+			sumA= plus(sumA,a);
+			}
+			sumA = -sumA;
+		}
+			
+		return sumA;
+
+		}
+
+	
 
 	public static int pow(int x, int n) {
 		int a = x;
@@ -74,11 +110,41 @@ public class Algebra {
 		int b = x2; 
 		int sumA = b;
 		int div = 1;
-         
+            if (a==0) {
+			  div = 0;	
+			}
+			else if (a<0 && b<0) {
+			   a = times(a, -1);
+			   b = times(b, -1);
 			while (sumA <= a-b) { 
-			div++;
-			sumA= times(div,b);
+			   div++;
+			   sumA= times(div,b);
+			}
 
+			}else if (a<0 && b>0) {
+			   a = times(a, -1);
+			 while (sumA <= a-b) { 
+			   div++;
+			   sumA= times(div,b);
+			}
+			
+			div= times(div, -1);
+
+	       	}else if (a>0 && b<0) {
+			   a = times(b, -1);
+		    while (sumA <= a-b) { 
+			   div++;
+			   sumA= times(div,b);
+		    }
+		 
+		    div= times(div, -1);
+
+		     }else{
+			  while (sumA <= a-b) { 
+					div++;
+					sumA= times(div,b);
+			}
+				
 			}
 			return div;	  
 		}
@@ -88,6 +154,7 @@ public class Algebra {
 		int a = x1;
 		int b = x2; 
 		int solution = minus(a, times(b,div(a,b)));
+	
 		return solution;
 	}	
 
@@ -100,9 +167,12 @@ public class Algebra {
      while (ans < a) {
 	 var++;
 	 ans = pow(var, 2);
-
+     
 	}
-
+    if (ans>a) {
+	var = minus(var, 1);
+		
+	}
 		return var;
 	}  	
 }  
