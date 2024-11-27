@@ -1,7 +1,4 @@
-// Implements algebraic operations and the square root function without using 
-// the Java operations a + b, a - b, a * b, a / b, a % b, and without calling 
-// Math.sqrt. All the functions in this class operate on int values and
-// return int values.
+
 
 public class Algebra {
 	public static void main(String args[]) {
@@ -25,43 +22,157 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+      int a = x1;
+	  int b = x2;
+	   if (b<0) {
+	   for (int i=0; b<i; i--) {
+	      a--;
+	    }
+	    }else{
+	      for (int i=0; i<b; i++)
+		{
+		  a++;
+		}
+	    }
+		
+		return a; 
 
-	// Returns x1 - x2
-	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
-	// Returns x1 * x2
-	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
-	// Returns x^n (for n >= 0)
-	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
-	// Returns the integer part of x1 / x2 
-	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
-	// Returns x1 % x2
-	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
 	}	
 
-	// Returns the integer part of sqrt(x) 
+	
+	public static int minus(int x1, int x2) {
+		int a = x1;
+		int b = x2;
+		if (b<0) {
+			for (int i=0; b<i; i--) {
+			   a++;
+			 }
+			 }else{
+			   for (int i=0; i<b; i++){
+			   a--;
+			 }
+			 }
+
+		return a;
+	}
+
+
+	public static int times(int x1, int x2) {
+		int a = x1;
+		int b = x2;
+		int sumA = a;
+        
+		if (a==0 || b==0) {
+			sumA = 0;
+		}else if (a>0 && b>0) {	
+		  for(int i=1; i<b; i++) {
+		  sumA= plus(sumA,a);
+		  }
+
+		}else if (a<0 && b>0) {
+		  for(int i=1; i<b; i++) {
+		  sumA= plus(sumA,a);
+		  }
+		}else if (a>0 && b<0) {
+          sumA = b;
+		  for(int i=1; i<a; i++) {
+			sumA= plus(sumA,b);
+			}
+		}else{ for(int i=-1; i>b; i--) {
+			sumA= plus(sumA,a);
+			}
+			sumA = -sumA;
+		}
+			
+		return sumA;
+
+		}
+
+	
+
+	public static int pow(int x, int n) {
+		int a = x;
+		int b = n;
+		int sumA= a;
+		if (b==0) {
+			sumA = 1;
+			return sumA;
+		}
+
+		for(int i=0; i<b-1; i++) {
+		  sumA= times(sumA, a);
+		}
+		return sumA;
+	}
+
+	public static int div(int x1, int x2) {
+		int a = x1;
+		int b = x2; 
+		int sumA = b;
+		int div = 1;
+            if (a==0) {
+			  div = 0;	
+			}
+			else if (a<0 && b<0) {
+			   a = times(a, -1);
+			   b = times(b, -1);
+			while (sumA <= a-b) { 
+			   div++;
+			   sumA= times(div,b);
+			}
+
+			}else if (a<0 && b>0) {
+			   a = times(a, -1);
+			 while (sumA <= a-b) { 
+			   div++;
+			   sumA= times(div,b);
+			}
+			
+			div= times(div, -1);
+
+	       	}else if (a>0 && b<0) {
+			   a = times(b, -1);
+		    while (sumA <= a-b) { 
+			   div++;
+			   sumA= times(div,b);
+		    }
+		 
+		    div= times(div, -1);
+
+		     }else{
+			  while (sumA <= a-b) { 
+					div++;
+					sumA= times(div,b);
+			}
+				
+			}
+			return div;	  
+		}
+	
+	
+	public static int mod(int x1, int x2) {
+		int a = x1;
+		int b = x2; 
+		int solution = minus(a, times(b,div(a,b)));
+	
+		return solution;
+	}	
+
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
-	}	  	  
-}
+	int a = x;
+	int var = 0;
+	int ans =0;
+    ans = pow(var,2);
+
+     while (ans < a) {
+	 var++;
+	 ans = pow(var, 2);
+     
+	}
+    if (ans>a) {
+	var = minus(var, 1);
+		
+	}
+		return var;
+	}  	
+}  
