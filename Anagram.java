@@ -28,8 +28,28 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		String preProcessStr1 = preProcess(str1);
+		String preProcessStr2 = preProcess(str2);
+		char c;
+		for (int i = 0; i < preProcessStr1.length(); i++) {
+			String newStr2 = "";
+			int str2index;
+			c = preProcessStr1.charAt(i);
+			str2index = preProcessStr2.indexOf(c);
+			if(str2index == -1)
+			 {
+				return false;
+			}
+			for (int j = 0; j < preProcessStr2.length(); j++) {
+				if (j != str2index)
+				{
+					newStr2 = newStr2 + preProcessStr2.charAt(j);
+
+				}
+			}
+			preProcessStr2 = newStr2;
+		}
+		return true;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
@@ -37,13 +57,37 @@ public class Anagram {
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
 		// Replace the following statement with your code
-		return "";
+		String preProcessString = "";
+		char c;
+		for (int i = 0; i < str.length(); i++) {
+			c = str.charAt(i);
+			if ((c < 97) || (c > 122)) {
+				if((c >= 65) && (c <= 90)) {
+
+					preProcessString += (char)(c + 32);
+				}
+				if (c == 32) {
+				 preProcessString += c;
+				}
+			}
+			else {
+				preProcessString += c;
+			}
+		}
+		return preProcessString;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
 		// Replace the following statement with your code
-		return "";
+		String randomStr = "";
+		String s1 = str;
+		for (int i = 0; i < str.length(); i++) {
+			int randomNumber = (int)((Math.random()) * s1.length());
+			randomStr += s1.charAt(randomNumber);
+			s1 = s1.substring(0,randomNumber) + s1.substring(randomNumber + 1);
+		}
+		return randomStr;
 	}
 }
